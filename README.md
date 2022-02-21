@@ -1,6 +1,6 @@
 # open_world
-open world is a photos sharing website like [Pexels](https://www.pexels.com).
-project status: inprogress
+open world is a photos sharing website like [Pexels](https://www.pexels.com).<br />
+project_status: inprogress
 
 to run this project open your terminal and write these commands:
 ```
