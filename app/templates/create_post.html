@@ -1,0 +1,22 @@
+{% from '_render_fields.html' import render_field %}
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+    
+        <div class="smaill-container space-tb">
+            <div class="flex column">
+                <h1 class="left">Upload</h1>
+                <form class="flex column" method="post" enctype=multipart/form-data>
+                    {{ form.hidden_tag() }}
+                    {{ render_field(form.title, custom_class='field margin-tb') }}
+                    {{ render_field(form.keywords, custom_class='field margin-tb') }}
+                    {{ render_field(form.photo, custom_class='margin-tb') }}
+                    {{ render_field(form.submit, custom_class='f-white btn btn-primary btn-round field margin-tb right') }}
+                </form>
+            </div>
+      
+        </div>
+
+{% endblock %}

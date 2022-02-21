@@ -1,0 +1,21 @@
+{% from '_render_fields.html' import render_field %}
+
+{% extends 'base.html' %}
+
+{% block body %}
+        <div class="smaill-container space-tb">
+            <div class="flex column">
+              <h1 class="left">Signup</h1>
+              <form class="flex column" method="post">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.username, custom_class='field margin-tb') }}
+                {{ render_field(form.password, custom_class='field margin-tb') }}
+               
+                {{ render_field(form.submit, custom_class='f-white btn btn-primary btn-round field margin-tb right') }}
+              </form>
+            </div>
+      
+          </div>
+
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% macro render_field(field, custom_class, lable=False) %}
+    {% if lable %}
+        {{ field.label }}
+    {% endif %}
+    {{ field(class_=custom_class) }}
+    {% for error in field.errors %}
+        <li class="error">{{ error }}</li>
+    {% endfor %}
+{% endmacro %}

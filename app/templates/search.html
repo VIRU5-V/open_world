@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+    <div class="container space-tb">
+        <h1 class="space-tb">searched->{{ form.search.data }}</h1>
+        <div class="grid">
+            {% for tag in res %}
+               
+                <div class="card flex column">
+                    <div class="box">
+                        {{ tag.keyword }}
+                    <img class="show-image round" src={{ url_for('static', filename='pictures/' + tag.post.photo)}} alt="">
+                    </div>
+                    <div class="details flex column center ">
+        
+                    <span class="right">
+                       
+                        {% if current_user.is_authenticated %}
+                            {% if tag.post.is_liked(current_user) %}
+                                <a class="flex center f-black link" href={{ url_for('main_blueprint.unlike', post_id=tag.post.id)}}>
+                                    <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#8b60ffff" >
+                                        <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    <span style="padding:0.5rem">{{ tag.post.likes.count() }}</span>
+                                </a>
+                            {% else %}
+                                <a class="flex center f-black link" href={{ url_for('main_blueprint.like', post_id=tag.post.id)}}>
+                                    <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000" >
+                                        <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    <span style="padding:0.5rem">{{ tag.post.likes.count() }}</span>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a class="flex center f-black link" href={{ url_for('main_blueprint.like', post_id=tag.post.id)}}>
+                                <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000" >
+                                    <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                                <span style="padding:0.5rem">{{ tag.post.likes.count() }}</span>
+                            </a>
+                        {% endif %}
+                        
+                    </span>
+                    <h4 class="f-s32 ta-center">{{ tag.post.title }}</h4>
+                    <a class="link f-black" href={{ url_for('main_blueprint.user', username=tag.post.user.name)}}>
+                        <div class="profile flex center ">
+                        <div class="small-profile">
+                            <img class="circle" src={{ url_for('static', filename='pictures/' + tag.post.photo)}} alt="">
+                        </div>
+                        <h4 class="f-400 space">{{ tag.post.user.name }}</h4>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            {% endfor %}
+  
+        </div>
+      </div>
+      <script type="text/javascript" src={{ url_for('static', filename='js/app.js')}}></script>
+
+{% endblock %}
+
+

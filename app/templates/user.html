@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container space-tb">
+        <h1 class="space-tb">Profile -> {{user.name | upper}}</h1>
+        <div class="grid">
+            {% for post in posts %}
+                <div class="card flex column">
+                    
+                    <div class="box">
+                    <img class="show-image round" src={{ url_for('static', filename='pictures/' + post.photo)}} alt="">
+                    </div>
+                    <div class="details flex column center ">
+        
+                        <span class="right">
+                            
+                        {% if current_user.is_authenticated %}
+                            {% if post.is_liked(current_user) %}
+                                <a class="flex center f-black link" href={{ url_for('main_blueprint.unlike', post_id=post.id)}}>
+                                    <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#8b60ffff" >
+                                        <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    <span style="padding:0.5rem">{{ post.likes.count() }}</span>
+                                </a>
+                            {% else %}
+                                <a class="flex center f-black link" href={{ url_for('main_blueprint.like', post_id=post.id)}}>
+                                    <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000" >
+                                        <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    <span style="padding:0.5rem">{{ post.likes.count() }}</span>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a class="flex center f-black link" href={{ url_for('main_blueprint.like', post_id=post.id)}}>
+                                <svg class="like" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000" >
+                                    <path  d="M0 0h24v24H0V0z" fill="none"/>
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                                <span style="padding:0.5rem">{{ post.likes.count() }}</span>
+                            </a>
+                        {% endif %}
+                        </span>
+                        <h4 class="f-s32 ta-center">{{ post.title }}</h4>
+                    </div>
+                    {% if post.is_own(current_user) %}
+                        <div class="flex right space-tb">
+                            <a class='btn btn-delete btn-round' href={{ url_for('main_blueprint.delete_post', id=post.id) }}>delete</a>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <script type="text/javascript" src={{ url_for('static', filename='js/app.js')}}></script>
+{% endblock %}

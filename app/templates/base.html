@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href={{ url_for('static', filename='css/master.css')}} >
+    
+    <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='favicon.ico')}}>
+    <link rel="apple-touch-icon" sizes="180x180" href={{ url_for('static', filename='apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href={{ url_for('static', filename='favicon-32x32.png')}}>
+    <link rel="icon" type="image/png" sizes="16x16" href={{ url_for('static', filename='favicon-16x16.png')}}>
+    <link rel="manifest" href={{ url_for('static', filename='site.webmanifest')}}>
+    
+    <title>Open_World!</title>
+
+  </head>
+  <body>
+    <header>
+      <nav>
+        <nav class="nav flex gap container space">
+          <div class="flex nav-top">
+            <a class="link f-s32 f-white" href={{ url_for('main_blueprint.posts') }}>OPEN_WORLD</a>
+            <div class="links space-tb">
+              {% if not current_user.is_authenticated %}
+                <a class="link f-white tiny-space" href={{ url_for('auth_blueprint.login') }}>login</a>
+                <a class="link f-white tiny-space" href={{ url_for('auth_blueprint.signup') }}>Signup</a>
+                {% else %}
+                <a class="link f-white tiny-space" href={{ url_for('main_blueprint.user', username=current_user.name) }}>Profile</a>
+                <a class="link f-white tiny-space" href={{ url_for('auth_blueprint.logout') }}>Logout</a>
+                <a class="f-white btn btn-primary btn-round" href={{ url_for('main_blueprint.create_post') }}>Upload</a>
+                
+              {% endif %}
+              
+              
+            </div>
+          </div>
+          <form method='POST' action={{url_for('main_blueprint.search')}} class="flex column center margin-tb">
+            {{ form.hidden_tag() }}
+            <input autocomplete='off' class="search" type="text" name="search" value="" placeholder="search here!">
+            <ul class="links suggestion off_white-bg">
+            </ul>
+          </form>
+          
+        </nav>
+    </header>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class='flex jc_center space flash f-white'>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block body %} {% endblock %}
+
+    <script type="text/javascript" src={{ url_for('static', filename='js/close_error.js')}}></script>
+  </body>
+</html>
