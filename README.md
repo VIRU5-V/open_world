@@ -34,7 +34,7 @@ flask init #to initialize database
 Linux
 ```
 
-export FLASK_APP=auth_app.py
+export FLASK_APP=open_world.py
 export FLASK_DEBUG=1
 
 ```
@@ -42,7 +42,7 @@ export FLASK_DEBUG=1
 Windows
 ```
 
-set FLASK_APP=auth_app.py
+set FLASK_APP=open_world.py
 set FLASK_DEBUG=1 
 
 
