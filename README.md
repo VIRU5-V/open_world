@@ -48,6 +48,8 @@ set FLASK_DEBUG=1
 
 ```
 
+```
+
 flask init #to initialize database
 flask run
 
