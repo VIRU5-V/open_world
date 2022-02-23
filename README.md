@@ -27,7 +27,7 @@ venv\Scripts\activate.bat
 ```
 
 pip install -r requirements.txt
-flask init #to initialize database
+
 
 ```
 
@@ -45,6 +45,11 @@ Windows
 set FLASK_APP=open_world.py
 set FLASK_DEBUG=1 
 
+
+```
+
+flask init #to initialize database
+flask run
 
 ```
 
